@@ -1,0 +1,23 @@
+import java.util.Scanner;
+class EvenOdd
+{
+	public static void main(String args[])
+	{
+		Scanner sc=new Scanner(System.in);
+		int n,s1=0,s2=0;
+		System.out.println("Enter the size of the array");
+		n=sc.nextInt();
+		int a[]=new int[n];
+		for(int i=0;i<n;i++)
+		{
+			System.out.println("Enter the element" +(i+1)+ "of the array");
+			a[i]=sc.nextInt();
+			if(i%2==0)
+				s1=s1+a[i];
+			else
+				s2=s2+a[i];
+		}
+        System.out.println("The sum of the numbers in the even indicies of the array is:"+s1);
+		System.out.println("The sum of the numbers in the odd indicies of the array is:"+s2);
+	}
+}
