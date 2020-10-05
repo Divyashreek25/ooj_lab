@@ -1,0 +1,23 @@
+import java.util.Scanner;
+class PNZintegers
+{
+	public static void main(String args[])
+	{
+		Scanner sc=new Scanner(System.in);
+		int n,c1=0,c2=0;
+		System.out.println("Enter the size of the array");
+		n=sc.nextInt();
+		int a[]=new int[n];
+		for(int i=0;i<n;i++)
+		{
+			System.out.println("Enter the element " +(i+1)+ " of the array");
+			a[i]=sc.nextInt();
+			if(a[i]>=0)
+				c1=c1+1;
+			else
+				c2=c2+1;
+		}
+        System.out.println("The count of the positive numbers in the array is:"+c1);
+		System.out.println("The count of the negative numbers in the array is:"+c2);
+	}
+}
