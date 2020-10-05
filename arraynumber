@@ -1,0 +1,45 @@
+import java.util.Scanner;
+class arraynumber
+{
+	public static void main(String args[])
+	{
+		Scanner sc=new Scanner(System.in);
+		int n,k=0,j=0,s=0,avg=0;
+		System.out.println("Enter the size of the array");
+		n=sc.nextInt();
+		int a[]=new int[n];
+		int b[]=new int[n];
+		int c[]=new int[n];
+		for(int i=0;i<n;i++)
+		{
+			System.out.println("Enter the element" +(i+1)+ "of the array");
+			a[i]=sc.nextInt();
+			if(a[i]%2==0)
+				{
+				 c[k]=a[i];
+				 k++;
+				 }
+			else
+				{
+				 b[j]=a[i];
+				 j++;
+				 }
+		}
+		int min=c[0],max=c[0];
+		for(int i=0;i<k;i++)
+		{
+		 s=s+c[i];
+		
+		 if(c[i]>=max)
+		   max=c[i];
+	    }
+	    for(int i=0;i<k;i++)
+		{
+		 if(c[i]<=min)
+		   min=c[i];
+		}
+		
+		avg=s/k;
+		System.out.println("Sum is "+s+" average is "+avg+" maximum number is "+max+" minimum number is "+min+"of array C");
+		}
+		}
