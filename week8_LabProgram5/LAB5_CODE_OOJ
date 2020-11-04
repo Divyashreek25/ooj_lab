@@ -1,0 +1,300 @@
+import java.util.Scanner;
+
+
+abstract class Account 
+{
+    
+String name, acctype;
+    
+long accNo;
+    
+double bal;
+    
+final double minBal = 1000.0;
+
+    
+Account(String name, long accNo, double bal, String acctype) 
+{
+        
+this.accNo = accNo;
+        
+this.name = name;
+        
+this.bal = bal;
+        
+this.acctype = acctype;
+    
+}
+
+    
+abstract void addBal(double amt);
+
+    
+abstract void displayBal();
+
+    
+abstract void withdrawBal(double amt);
+
+}
+
+
+class Curr_acct extends Account 
+{
+    
+Curr_acct(String name, long accNo, double bal) 
+{
+        
+super(name, accNo, bal, "Current");
+        
+System.out.println("Name: "+name+"\n Accno: "+accNo+"\n Balance: "+bal+"\n Account Type: "+acctype);
+    
+}
+
+    
+void addBal(double amt)
+{
+        
+this.bal  += amt;
+        
+    
+}
+
+    
+void displayBal()
+{
+        
+System.out.println("The balance is: "+this.bal);
+    
+}
+
+void checkBal(){
+if(this.bal<minBal)
+{
+System.out.println("Insufficient balance, service charge imposed");
+
+this.bal -= this.bal*0.02;
+        
+}
+}	  
+void withdrawBal(double amt)
+{
+   
+this.bal -= amt;
+        
+checkBal();   
+}
+
+
+}
+
+
+class Sav_acct extends Account 
+{
+    
+Sav_acct(String name, long accNo, double bal) 
+{
+        
+super(name, accNo, bal, "Savings");
+        
+System.out.println("Name: "+name+"\n Accno: "+accNo+"\n Balance: "+bal+"\n Account Type: "+acctype);
+    
+}
+
+    
+void addBal(double amt)
+{
+        
+this.bal+= amt;
+        
+addIntr();
+    
+}
+    
+    
+void addIntr() 
+{
+    
+int tm=2, R=7;    
+this.bal+= this.bal*(Math.pow((1+(R/100)), tm));
+    
+}
+
+    
+void displayBal()
+{
+        
+System.out.println("The balance is: "+this.bal);
+   
+}
+	
+
+    
+void withdrawBal(double amt)
+{
+       
+this.bal-= amt;
+        
+    
+}
+    
+    
+   
+    
+}
+
+
+
+class AccountMain 
+{
+    
+public static void main(String[] args) {
+        
+Scanner sc = new Scanner(System.in);
+        
+double amt;
+		
+System.out.println("Enter details:");
+		
+System.out.println("Name:");
+		
+String x=sc.next();
+		
+System.out.println("Account Number:");
+		
+long y=sc.nextLong();
+		
+while(true)
+		
+{
+		
+System.out.println("Type of account:\n 1.Current account\n 2.Savings account\n 3.Exit");
+		
+int o=sc.nextInt();
+	
+			
+        
+if(o==1){
+			
+System.out.println("The Current Account provides cheque book facility but no interest.");
+		
+Curr_acct cr = new Curr_acct(x, y, 20000);
+        
+while(true)
+			
+{
+            
+System.out.println("1.Deposit\n 2.Display Balance\n 3.Withdraw Amount\n 4.Exit");
+            
+int ch = sc.nextInt();
+		
+            
+switch (ch) 
+{
+                
+case 1:
+                    
+System.out.println("Enter the amount to be added:");
+                    
+amt = sc.nextDouble();
+                    
+cr.addBal(amt);
+                    
+break;
+
+                
+case 2:
+                    
+cr.displayBal();
+                   
+break;
+
+                
+case 3:
+                    
+System.out.println("Enter the amount to be withdrawn:");
+                    
+amt = sc.nextDouble();
+                    
+cr.withdrawBal(amt);
+                    
+break;
+				
+case 4:System.exit(0);
+
+		        
+default:System.out.println("Invalid choice");
+            
+}
+			
+}
+        
+		
+}
+		
+        
+else if(o==2){
+			
+System.out.println("The Savings Account provides compound interest and withdrawal facilities but no cheque book facility.");
+		
+Sav_acct sv = new Sav_acct(x, y, 5000);
+        
+while(true) 
+{
+            
+System.out.println("1:Deposit\n 2:Display Balance\n 3:Withdraw Amount\n 4:Exit");
+            
+int ch = sc.nextInt();
+            
+switch (ch) 
+{
+                
+case 1:
+                    
+System.out.println("Enter the amount to be added:");
+                    
+amt = sc.nextDouble();
+                    
+sv.addBal(amt);
+                    
+break;
+
+                
+case 2:
+                    
+sv.displayBal();
+                    
+break;
+
+                
+case 3:
+                    
+System.out.println("Enter the amount to be withdrawn:");
+                    
+amt = sc.nextDouble();
+                    
+sv.withdrawBal(amt);
+                    
+break;
+                
+case 4:System.exit(0);
+
+		        
+default:System.out.println("Invalid choice");
+            
+}
+        
+}
+		
+}
+		
+else if(o==3)
+			
+System.exit(0);
+		
+else
+			
+System.out.println("Invalid choice");
+
+}
+}
+}
