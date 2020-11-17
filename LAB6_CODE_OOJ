@@ -1,0 +1,101 @@
+package CIE;
+
+import java.util.*;
+
+public class internals extends student
+{
+
+	public int a[];
+public void input()
+	{
+         Scanner sc=new Scanner(System.in);
+		 System.out.println("enter cie marks(5 subjects) out of 50");
+         a=new int[5];
+		 for(int i=0;i<5;i++)
+		  a[i]=sc.nextInt();
+      }
+
+
+}
+package SEE;
+import CIE.*;
+import java.util.*;
+
+public class  externals extends CIE.student
+{
+	public int a[];
+    public void input()
+	{
+         Scanner sc=new Scanner(System.in);
+		 System.out.println("enter see marks(5 subjects) out of 100");
+         a=new int[5];
+		 for(int i=0;i<5;i++)
+		  a[i]=sc.nextInt();
+      }
+
+}
+import CIE.*;
+import SEE.*;
+import java.util.*;
+
+class  total
+{
+	public static void main(String[] args) 
+	{
+
+		Scanner sc=new Scanner(System.in);
+		 System.out.println("enter number of students ");
+         int n=sc.nextInt();
+		 CIE.internals in[]=new CIE.internals[n];
+		SEE.externals ex[]=new SEE.externals[n];
+         int total;
+		 for(int j=0;j<n;j++)
+		{
+		 System.out.println("enter"+(j+1)+"student details:");
+		 in[j]=new CIE.internals();
+		 ex[j]=new SEE.externals();
+		  in[j].inputd();
+		  
+		  in[j].input();
+		  ex[j].input();
+		}
+
+		  System.out.println(" ");
+		  for(int j=0;j<n;j++)
+		{
+           in[j].display();
+           System.out.println("\nstudent "+(j+1)+" total marks:");
+
+         for(int k=0;k<5;k++)
+		 System.out.println(in[j].a[k]+(ex[j].a[k]/2));
+
+		}
+
+      
+	}
+}
+package CIE;
+
+import java.util.*;
+public class  student
+{
+	public String usn,name;
+	public int sem;
+
+	public void inputd()
+	{
+         Scanner sc=new Scanner(System.in);
+		 System.out.println("enter usn,name,sem");
+		 usn=sc.next();
+		 name=sc.next();
+		 sem=sc.nextInt();
+
+     }
+
+	 public void display()
+	{
+         
+		 System.out.println("usn="+usn+"  name="+name+"  sem="+sem);
+		
+     }
+}
