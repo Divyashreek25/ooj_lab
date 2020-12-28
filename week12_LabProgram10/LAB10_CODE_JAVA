@@ -1,81 +1,185 @@
 import java.awt.*;
+
 import java.awt.event.*;
 
-public class Division extends Frame implements ActionListener {
-	String msg;
-	TextField num1, num2, res;
-	Label l1, l2, l3;
-	Button div;
 
-	public Division() {
-          setLayout(new FlowLayout());
-		l1 = new Label("Dividend",Label.RIGHT);
-		l2 = new Label("Divisor", Label.RIGHT);
-		l3 = new Label("Result", Label.RIGHT);
-		num1 = new TextField(10);
-		num2 = new TextField(10);
-		res = new TextField(10);
-		div = new Button("DIVIDE");
+public class Division extends Frame implements ActionListener {
+	
+public class DialogD extends Frame{
+String msg;
+DDialog myDialog;
+
+
+public DialogD() {
+myDialog = new DDialog(this, "New Dialog Box", msg);
+}
+}
+String msg;
+	
+TextField num1, num2, res;
+	
+Label l1, l2, l3;
+	
+Button div;
+
+	
+
+public Division() {
+          
+setLayout(new FlowLayout());
+		
+l1 = new Label("Dividend",Label.RIGHT);
+		
+l2 = new Label("Divisor", Label.RIGHT);
+		
+l3 = new Label("Result", Label.RIGHT);
+		
+num1 = new TextField(10);
+		
+num2 = new TextField(10);
+		
+res = new TextField(10);
+		
+div = new Button("DIVIDE");
                 
-		add(l1);
-		add(num1);
-		add(l2);
-		add(num2);
-		add(l3);
-		add(res);
-		add(div);
+		
+add(l1);
+		
+add(num1);
+		
+add(l2);
+		
+add(num2);
+		
+add(l3);
+		
+add(res);
+		
+add(div);
                 
-                div.addActionListener(this);
-                addWindowListener(new MyWindowAdapter());
-                }
+                
+div.addActionListener(this);
+                
+addWindowListener(new MyWindowAdapter());
+                
+}
 
 	 
 
-	public void actionPerformed(ActionEvent ae) {
-		int num1 = 0, num2 = 0;
+	
+
+public void actionPerformed(ActionEvent ae) {
 		
-				try {
-					num1 = Integer.parseInt(this.num1.getText());
-					num2 = Integer.parseInt(this.num2.getText());
-                                        int num3 = num1 / num2;
+int num1 = 0, num2 = 0;
+		
+				
+try {
+					
+num1 = Integer.parseInt(this.num1.getText());
+					
+num2 = Integer.parseInt(this.num2.getText());
+                                        
+double num3 =(double) num1 / num2;
 
-					res.setText(String.valueOf(num3));
-					msg = "Operation Successful";
-					repaint();
-				} catch (NumberFormatException e) {
-					System.out.println(e);
-					res.setText("");
-					msg = "NumberFormatException - Non-numeric";
-					repaint();
-				} 
-                                 try {
-                                        if(num2==0)
-                                          throw new ArithmeticException();
+					
+res.setText(String.valueOf(num3));
+					
+msg = "Division Successful";
+					
+				
+} catch (NumberFormatException e) {
+					
+System.out.println(e);
+					
+res.setText("");
+					
+msg = "NumberFormatException ";
+					
+DDialog dd = new DDialog(this, "Dialog", msg);
+dd.setVisible(true);
+return;				
+} 
+                                 
+try {
+                                        
+if(num2==0)
                                           
-                                 } catch (ArithmeticException e) {
-					System.out.println("Can't be divided by Zero" + e);
-					res.setText("");
-					msg = "Can't be divided by Zero";
-					repaint();
-				}
-	}
+throw new ArithmeticException();
+ 
 
-	public void paint(Graphics g) {
-		g.drawString(msg, 30, 70);
-	}
-       
-       public static void main(String[] args) {
-       Division appwin = new Division();
+msg = "Can't be divided by Zero";
+                                         
+                                 
+} catch (ArithmeticException e) {
+					
+System.out.println("Can't be divided by Zero" + e);
+					
+res.setText("");
+					
+msg = "Can't be divided by Zero";
 
-       appwin.setSize(new Dimension(280,180));
-       appwin.setTitle("Division");
-       appwin.setVisible(true);
-      }
+DDialog dd = new DDialog(this, "Dialog", msg);
+dd.setVisible(true);					
+return;
+				
+}
+	
 }
 
-       class MyWindowAdapter extends WindowAdapter {
-       public void windowClosing(WindowEvent we)
-       {
-        System.exit(0);
-        }
+	
+
+public void paint(Graphics g) {
+		
+g.drawString(msg, 80, 100);
+	
+}
+       
+       
+
+public static void main(String[] args) {
+       
+Division appwin = new Division();
+
+       
+appwin.setSize(new Dimension(480,280));
+       
+appwin.setTitle("Division");
+       
+appwin.setVisible(true);
+      
+}
+
+}
+
+       
+
+class MyWindowAdapter extends WindowAdapter {
+       
+public void windowClosing(WindowEvent we)
+       
+{
+        
+System.exit(0);
+        
+}
+
+}
+
+class DDialog extends Dialog {
+DDialog(Frame parent, String title, String msg)
+{
+super(parent,title,false);
+setLayout(new FlowLayout());
+setSize(300,300);
+add(new Label(msg));
+Button b;
+add(b = new Button("OK"));
+b.addActionListener((ae)->dispose());
+addWindowListener(new WindowAdapter() {
+public void windowClosing(WindowEvent we)
+{
+dispose();
+}
+});
+}
 }
